@@ -24,7 +24,7 @@ node('build-slave') {
                 env.NODE_ENV = "build"
                 print "Environment will be : ${env.NODE_ENV}"
                 dir('data-pipeline-flink'){
-                sh '/opt/apache-maven-3.6.3/bin/mvn3.6 clean install -DskipTests'
+                sh '/opt/apache-maven-3.6.3/bin/mvn clean install -DskipTests'
                 }
             }
 
