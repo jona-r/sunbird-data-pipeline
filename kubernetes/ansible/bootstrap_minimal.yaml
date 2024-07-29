@@ -4,7 +4,7 @@
 - hosts: local
   gather_facts: false
   environment:
-    KUBECONFIG: "{{ kubeconfig_path }}"
+    KUBECONFIG: "/var/lib/jenkins/secrets/dev-k8s.yaml"
   serial: 1
   vars:
     helm_vars:
