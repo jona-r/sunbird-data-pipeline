@@ -15,7 +15,7 @@
 
     - name: Push image to registry
       docker_image:
-        name: "{{ hub_org }}/{{ image_name }}:{{ image_tag }}"
+        name: "533267371196.dkr.ecr.ap-south-1.amazonaws.com/{{ image_name }}:{{ image_tag }}"
         push: yes
         source: local        
    
