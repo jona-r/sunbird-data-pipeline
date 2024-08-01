@@ -7,7 +7,7 @@
     - ingestion-kafka
 
 - name: override retention time
-  command: /opt/kafka/bin/kafka-configs.sh --bootstrap-server localhost:9092 --alter --topic {{env}}.{{item.name}} --config retention.ms={{ item.retention_time }}
+  command: /opt/kafka/bin/kafka-configs.sh --bootstrap-server localhost:9092 --alter --topic {{env}}.{{item.name}} --add-config retention.ms={{ item.retention_time }}
   with_items: "{{ingestion_kafka_overriden_topics}}"
   when: kafka_id=="1" and item.retention_time is defined
   tags:
@@ -22,20 +22,20 @@
     - processing-kafka
 
 - name: override retention time
-  command: /opt/kafka/bin/kafka-configs.sh --bootstrap-server localhost:9092 --alter --topic {{env}}.{{item.name}} --config retention.ms={{ item.retention_time }}
+  command: /opt/kafka/bin/kafka-configs.sh --bootstrap-server localhost:9092 --alter --topic {{env}}.{{item.name}} --add-config retention.ms={{ item.retention_time }}
   with_items: "{{processing_kafka_overriden_topics}}"
   when: kafka_id=="1" and item.retention_time is defined  
   tags:
     - processing-kafka
 
 - name: overriding default partition size
-  shell: "/opt/kafka/bin/kafka-configs.sh  --bootstrap-server localhost:9092 --alter --topic {{item}} --config max.message.bytes={{kafka_partition_override_size}}"
+  shell: "/opt/kafka/bin/kafka-configs.sh  --bootstrap-server localhost:9092 --alter --topic {{item}} --add-config max.message.bytes={{kafka_partition_override_size}}"
   with_items:
     - "{{env}}.telemetry.ingest"
     - "{{env}}.telemetry.extractor.failed"
 
 - name: overriding data pipeline downstream topic size
-  shell: "/opt/kafka/bin/kafka-configs.sh  --bootstrap-server localhost:9092 --alter --topic {{item}} --config max.message.bytes={{dp_downstream_kafka_max_message_bytes}}"
+  shell: "/opt/kafka/bin/kafka-configs.sh  --bootstrap-server localhost:9092 --alter --topic {{item}} --add-config max.message.bytes={{dp_downstream_kafka_max_message_bytes}}"
   with_items:
     - "{{env}}.druid.events.error"
     - "{{env}}.druid.events.log"
