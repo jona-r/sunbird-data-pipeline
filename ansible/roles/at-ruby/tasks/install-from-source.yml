@@ -27,20 +27,20 @@
     - libgdbm-dev
   when: ansible_os_family == 'Debian'
 
-- name: Download ruby.
-  become: yes
-  get_url:
-    url: "{{ ruby_download_url }}"
-    dest: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
-  async: 1000
-  poll: 10
+#- name: Download ruby.
+#  become: yes
+#  get_url:
+ #   url: "{{ ruby_download_url }}"
+#    dest: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
+#  async: 1000
+#  poll: 10
 
-- name: Extract ruby.
-  become: yes
-  unarchive:
-    src: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
-    dest: "{{ workspace }}/"
-    copy: no
+##- name: Extract ruby.
+#  become: yes
+#  unarchive:
+#    src: "{{ workspace }}/ruby-{{ ruby_version }}.tar.gz"
+#    dest: "{{ workspace }}/"
+#    copy: no
 
 #- name: Build ruby
  # become: yes
