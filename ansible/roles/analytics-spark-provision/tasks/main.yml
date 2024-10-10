@@ -129,12 +129,12 @@
     repo: ppa:brightbox/ruby-ng
 
 # kenneth changed to install ruby-dev 2.6 as per R.4.6.0 - there is no ruby2.2-dev in bionic
-- name: Install latest ruby-dev
+- name: Install ruby-dev package
   become: yes
   apt:
-    name: "ruby2.6-dev"
-    state: installed
-    update_cache: true
+    name: ruby2.6-dev
+    state: present
+    update_cache: yes
     cache_valid_time: 3600
 
 # changed to ruby 2.6 as per R.4.6.0
