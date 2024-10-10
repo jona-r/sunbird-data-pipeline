@@ -21,6 +21,7 @@
   vars_files:
     - "{{inventory_dir}}/secrets.yml"
   vars:
+    ansible_python_interpreter: /usr/bin/python2
     postgresql_databases:
       - name: druid
     postgresql_users:
@@ -28,14 +29,15 @@
         db: druid
         password: "{{ dp_vault_druid_postgress_pass }}"
   tasks:
-    - name: Ensure database is created
-      postgresql_db: name="{{ item.name }}" \
-                login_host="{{ postgres.db_url }}" \
-                port="{{ postgres.db_port }}" \
-                login_user="{{ postgres.db_admin_user }}" \
-                login_password="{{ postgres.db_admin_password }}" \
-                encoding='UTF-8' \
-                state=present
+    - name: Ensure databases are created
+      postgresql_db:
+        name: "{{ item.name }}"
+        login_host: "{{ postgres.db_url }}"
+        port: "{{ postgres.db_port }}"
+        login_user: "{{ postgres.db_admin_user }}"
+        login_password: "{{ postgres.db_admin_password }}"
+        encoding: 'UTF-8'
+        state: present
       with_items: "{{ postgresql_databases }}"
 
     - name: Ensure user has access to the database
