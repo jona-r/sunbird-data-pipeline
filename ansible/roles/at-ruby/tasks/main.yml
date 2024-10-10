@@ -7,9 +7,11 @@
   when: ruby_install_from_source == true
 
 # Install Bundler and configured gems.
-- name: Install Bundler.
-  gem: name=bundler state=present user_install=no
-  when: ruby_install_bundler
+- name: Install Bundler for Ruby 2.3.0
+  gem:
+    name: bundler
+    state: present
+    user_install: no
   become: yes
 
 - name: Install configured gems.
