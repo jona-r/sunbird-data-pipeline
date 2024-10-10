@@ -21,13 +21,13 @@
   vars_files:
     - "{{inventory_dir}}/secrets.yml"
   vars:
-    ansible_python_interpreter: /usr/bin/python2
     postgresql_databases:
       - name: druid
     postgresql_users:
       - name: druid
         db: druid
         password: "{{ dp_vault_druid_postgress_pass }}"
+    ansible_python_interpreter: /usr/bin/python3  # or /usr/bin/python3 if you prefer Python 3
   tasks:
     - name: Ensure databases are created
       postgresql_db:
