@@ -1,13 +1,24 @@
 ---
+- name: Set up Zookeeper user and group
+  hosts: all
+  become: yes
+  vars:
+    zookeeper_user: "zookeeper"  # Replace with the actual user/group name
 
-- name: setup group
-  group: name={{ zookeeper_user }} system=yes
+  tasks:
+    - name: Setup group
+      group:
+        name: "{{ zookeeper_user }}"
+        system: yes
 
-- name: Setup user
-  user: name={{ zookeeper_user }} system=yes group={{ zookeeper_user }}
+    - name: Setup user
+      user:
+        name: "{{ zookeeper_user }}"
+        system: yes
+        group: "{{ zookeeper_user }}"
 
-- include: Debian.yml
-  when: ansible_os_family == 'Debian'
+    - include_tasks: Debian.yml
+      when: ansible_os_family == 'Debian'
 
-- include: RedHat.yml
-  when: ansible_os_family == 'RedHat'
+    - include_tasks: RedHat.yml
+      when: ansible_os_family == 'RedHat'
