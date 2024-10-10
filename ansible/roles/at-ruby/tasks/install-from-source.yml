@@ -42,15 +42,15 @@
     dest: "{{ workspace }}/"
     copy: no
 
-- name: Build ruby
-  become: yes
-  shell: "{{ item }} chdir={{ workspace }}/ruby-{{ ruby_version }}"
-  args:
-    creates: /usr/local/bin/ruby
-  with_items:
-    - "./configure --enable-shared"
-    - "make"
-    - "make install"
+#- name: Build ruby
+ # become: yes
+ # shell: "{{ item }} chdir={{ workspace }}/ruby-{{ ruby_version }}"
+ # args:
+ #   creates: /usr/local/bin/ruby
+ # with_items:
+ #   - "./configure --enable-shared"
+ #   - "make"
+  #  - "make install"
 
 
 - name: Add ruby symlinks.
