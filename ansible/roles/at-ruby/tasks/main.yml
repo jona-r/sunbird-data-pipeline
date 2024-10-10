@@ -10,6 +10,7 @@
 - name: Install Bundler for Ruby 2.3.0
   gem:
     name: bundler
+    version: 1.17.3
     state: present
     user_install: no
   become: yes
