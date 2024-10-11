@@ -95,7 +95,7 @@
      state: restarted
   become: yes
   
-- include: add_cron.yml
+- include_tasks: add_cron.yml
 
 - name: start monit
   service: 
