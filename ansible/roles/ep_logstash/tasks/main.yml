@@ -1,6 +1,6 @@
 ---
-- include: common.yml
+- include_tasks: common.yml
   when: not ft
 
-- include: ft.yml
+- include_tasks: ft.yml
   when: ft
