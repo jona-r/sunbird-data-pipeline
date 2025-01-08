@@ -1,6 +1,11 @@
 ## Data products deployment ##
-- name: Ensure azure blob storage container exists
-  command: aws s3api create-bucket --bucket {{ sunbird_public_storage_account_name }} --region {{ s3_default_bucket_location }}
+- name: Ensure AWS S3 bucket exists with explicit keys
+  command: >
+    aws s3api create-bucket
+    --bucket {{ sunbird_public_storage_account_name }}
+    --region {{ s3_default_bucket_location }}
+    --access-key {{ s3_storage_key }}
+    --secret-key {{ s3_storage_secret }}
   when: dp_object_store_type == "aws"
   tags:
     - always
