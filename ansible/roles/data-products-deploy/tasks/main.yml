@@ -1,9 +1,14 @@
 ## Data products deployment ##
 - name: Ensure AWS S3 bucket exists with credentials
-  command: aws s3api create-bucket --bucket {{ sunbird_public_storage_account_name }} --region {{ s3_default_bucket_location }}
-  environment:
-    AWS_ACCESS_KEY_ID: "{{ s3_storage_key }}"
-    AWS_SECRET_ACCESS_KEY: "{{ s3_storage_secret }}"
+  block:
+    - name: Check if the bucket exists
+      command: aws s3api head-bucket --bucket {{ sunbird_public_storage_account_name }} --region {{ s3_default_bucket_location }}
+      register: bucket_exists
+      ignore_errors: true
+      environment:
+        AWS_ACCESS_KEY_ID: "{{ s3_storage_key }}"
+        AWS_SECRET_ACCESS_KEY: "{{ s3_storage_secret }}"
+
   when: dp_object_store_type == "aws"
   tags:
     - always
