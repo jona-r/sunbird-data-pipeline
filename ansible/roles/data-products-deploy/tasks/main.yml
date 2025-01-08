@@ -44,8 +44,7 @@
     - framework
 
 - name: Copy Framework Library to azure blob
-  command: aws s3 cp --debug {{ analytics.home }}/models-{{ model_version }}/{{ analytics_core_artifact }} s3://{{ bucket }}/models-{{ model_version }}/{{ analytics_core_artifact }} --acl bucket-owner-full-control
-
+  command: aws s3 cp --debug {{ analytics.home }}/models-{{ model_version }}/{{ analytics_core_artifact }} s3://{{ sunbird_public_storage_account_name }}/models-{{ model_version }}/{{ analytics_core_artifact }} --acl bucket-owner-full-control
   async: 3600
   poll: 10
   tags:
