@@ -11,7 +11,7 @@
     - dataproducts
 
 - name: Copy Core Data Products to azure blob
-  command: az storage blob upload --overwrite -c {{ bucket }} --name models-{{ model_version }}/{{ analytics_batch_module_artifact }} -f {{ analytics.home }}/models-{{ model_version }}/{{ analytics_batch_module_artifact }}
+  command: aws s3 cp --debug {{ analytics.home }}/models-{{ model_version }}/{{ analytics_core_artifact }} s3://{{ bucket }}/models-{{ model_version }}/{{ analytics_core_artifact }} --acl bucket-owner-full-control
   async: 3600
   poll: 10
   tags:
